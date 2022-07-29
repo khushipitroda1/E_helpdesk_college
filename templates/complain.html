@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+      <link rel="stylesheet" href="{% static 'css/openform.css' %}">
+      <style>
+         h2{
+         color:red;
+         text-align:center;
+         font-style: italic;
+         }
+         body{
+         font-family: Lato, sans-serif;
+         }
+      </style>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="{% url 'dashboard' %}">E-Help</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+                  <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+               </li>
+               <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
+                  <a class="nav-link" href="{% url 'insert_complain' %}">Complain</a>
+               </li>
+               <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
+                  <a class="nav-link" href="{% url 'feedback' %}">Feedbacks</a>
+               </li>
+               <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+                  <a class="nav-link" href="#about">About US</a>
+               </li>
+              <li class="nav-item ">
+                  <a class="nav-link" href="#contact">Contact US</a>
+               </li>
+            </ul>
+            <h4 style="color:white; margin-right:230px;">Hello, {{ user.username }}</h4>
+            <a href="{% url 'login' %}" class="btn btn-success mr-2">Login</a>
+            <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">SignUp</button>
+         </div>
+      </nav>
+
+<h2 align="center">Complain List</h2>
+<table class="table table-bordered">
+    <thead class="thead-light">
+    <tr>
+        <th>ID</th>
+        <th>Std_ID</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Message</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    {% for i in cm %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.std_id }}</td>
+        <td>{{ i.type }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.message }}</td>
+        <td><button class="open-button btn btn-outline-warning" onclick="openForm()">Accept</button>
+                <div class="form-popup" id="myForm">
+            <form class="form-container">
+                <label for="message"><b>Message</b></label>
+                <input type="text" placeholder="Enter Message" id="message" name="message" required>
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+                </div></td>
+        <td><a href="{% url 'delete_complain' i.id %}" class="btn btn-outline-danger">Reject</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+
+   <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+   </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2 align="center">Feedbacks</h2>
+<table class="table table-bordered">
+    <thead class="thead-light">
+    <tr>
+        <th>ID</th>
+        <th>Std_ID</th>
+        <th>Feed</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    {% for i in fd %}
+    <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.std_id }}</td>
+        <td>{{ i.feed }}</td>
+        <td>{{ i.date }}</td>
+        {% if i.happy %}
+        <td><img src="{% static 'img/yes.png' %}" height="20" width="20" style="margin-left:25px;"></td>
+        {% else %}
+        <td><img src="{%  static 'img/no.png' %}" height="20" width="20" style="margin-left:25px;"></td>
+        {% endif %}
+        <td><a href="{% url 'delete_feedback' i.id %}" class="btn btn-outline-danger">Delete</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<br>
+<h2>Complain</h2>
+<!--<div class="container">-->
+<!--  <div class="alert-success alert-dismissible">-->
+<!--      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+  {% for message in messages %}
+      <strong>Success!</strong> {{ message }}
+    {% endfor %}
+<!--  </div>-->
+
+<div class="container">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+</form>
+</div><br>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   <head>
+      <title>E-Help Desk</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+      <link rel="stylesheet" href="{% static 'css/team.css' %}">
+
+      <style>
+         h2{
+            color:red;
+            text-align:center;
+            font-style: italic;
+         }
+         body{
+            font-family: Lato, sans-serif;
+         }
+         .notification {
+            background-color: #555;
+           color: white;
+           text-decoration: none;
+           padding: 12px 20px;
+           margin-left:190px;
+           position: relative;
+           display: inline-block;
+           border-radius: 2px;
+         }
+         .notification:hover {
+           background: green;
+           color:white;
+           text-decoration: none;
+         }
+         .notification .badge {
+           position: absolute;
+           top: -10px;
+           right: -10px;
+           padding: 5px 10px;
+           border-radius: 50%;
+           background: red;
+           color: white;
+         }
+      </style>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="{% url 'dashboard' %}">E-Help</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+                  <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+               </li>
+               <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
+                  <a class="nav-link" href="{% url 'insert_complain' %}">Complain</a>
+               </li>
+               <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
+                  <a class="nav-link" href="{% url 'insert_feedback' %}">Feedback</a>
+               </li>
+               <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+                  <a class="nav-link" href="{% url 'about' %}">About US</a>
+               </li>
+<!--              <li class="nav-item ">-->
+<!--                  <a class="nav-link" href="#contact">Contact US</a>-->
+<!--               </li>-->
+               <li><a href="#" class="notification"><span>Inbox</span><span class="badge">0</span></a></li>
+            </ul>
+            <h4 style="color:white; margin-right:230px;">Hello, {{ user.username }} </h4>
+            <a href="{% url 'logout' %}" class="btn btn-danger ">Logout</a>
+         </div>
+      </nav>
+
+      {% block content %}
+      {% endblock %}
+    <footer class="site-footer" id="about">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12 col-md-6">
+                  <h6>About</h6>
+                  <p class="text-justify">Students can create their account anytime and free. There are complain facility. Students can make a complain in their college and receive a work then students can give a feedback about complain.</p>
+               </div>
+<!--               <div class="col-xs-6 col-md-3">-->
+<!--                  <h6>Categories</h6>-->
+<!--                  <ul class="footer-links">-->
+<!--                     <li><a href="http://scanfcode.com/category/c-language/">C</a></li>-->
+<!--                     <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>-->
+<!--                     <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>-->
+<!--                     <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>-->
+<!--                     <li><a href="http://scanfcode.com/category/android/">Android</a></li>-->
+<!--                     <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>-->
+<!--                  </ul>-->
+<!--               </div>-->
+               <div class="col-xs-6 col-md-4">
+                  <h6>Quick Links</h6>
+                  <ul class="footer-links">
+                     <li><a href="#about">About Us</a></li>
+                     <li><a href="#contact">Contact Us</a></li>
+                     <li><a href="{% url 'insert_complain' %}">Complain</a></li>
+                     <li><a href="{% url 'insert_feedback' %}">Feedback</a></li>
+                  </ul>
+               </div>
+            </div>
+            <hr>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8 col-sm-6 col-xs-12">
+                  <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
+                     <a href="#">Nisit Patel</a>.
+                  </p>
+               </div>
+<!--               <div class="col-md-4 col-sm-6 col-xs-12">-->
+<!--                  <ul class="social-icons">-->
+<!--                     <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>-->
+<!--                     <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--                     <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>-->
+<!--                     <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>-->
+<!--                  </ul>-->
+<!--               </div>-->
+            </div>
+         </div>
+      </footer>
+      <script rel="script" src="{% static 'js/form.js' %}"></script>
+
+   </body>
+</html>
+
